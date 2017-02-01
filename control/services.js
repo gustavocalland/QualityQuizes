@@ -45,7 +45,7 @@ qqApp.service('storageService', function($http, $q){
 
 
     this.getUserByEmail = function (email, callback) {
-       getUsers(function(response){
+       getAllUsers().then(function(response){
             var users = response;
 
             for(i=0; i<users.length; i++){
@@ -56,59 +56,65 @@ qqApp.service('storageService', function($http, $q){
             }
 
             callback(null);
-        });
+        },logError());
     };
 
-    this.setUser = function(user, callback){
-        getUsers(function(response){
-            var users = response;
-            var exists = false;
-            var i=0;
 
-            for(i=0; i<users.length; i++){
-                if(users[i].id == user.id){
-                    exists = true;
-                    //replace previous user
-                    users[i] = user;
-                    
-                    break;
+    this.setUser = function(user){
+        return $q(function(success){
+            getAllUsers().then(function(allUsers){
+                var users = allUsers;
+                var exists = false;
+                var i=0;
+
+                for(i=0; i<users.length; i++){
+                    if(users[i].id == user.id){
+                        exists = true;
+                        //replace previous user
+                        users[i] = user;
+                        
+                        break;
+                    }
                 }
-            }
 
-            if (!exists){
-                user.id = i+1;
-                users.push(user);
-            }
+                if (!exists){
+                    user.id = i+1;
+                    users.push(user);
+                }
 
-            //persist users list
-            setUsers(users);
-
-            callback();
-
+                //persist users list
+                setUsers(users);
+                success();
+            },logError(error));
         });
     }
 
-    //private functions to persist users to localstorage
-    var getUsers = function(callback){
-        if (localStorage.getItem("users")) {
-            callback(JSON.parse(localStorage.getItem("users")));
-        }else{
-            //not found, lets get from the json
-
-            $http.get("database/users.json").then(function(response) {
-                var json = response.data.users;
-                setUsers(json);
-                callback(json);
-            }, function(err) {
-                //some error
-                alert(err);
-            });
-        }
+    //private functions to get all users from the localstorage
+    var getAllUsers = function(){
+        return $q(function(success, failure){
+            if (localStorage.getItem("users")) {
+                success(JSON.parse(localStorage.getItem("users")));
+            }else{
+                //No user list found on local storage. We get the initial list from the json
+                $http.get("database/users.json").then(function(response) {
+                    var json = response.data.users;
+                    setUsers(json);
+                    success(json);
+                }, function(err) {
+                    //some error
+                    failure(err);
+                });
+            }
+        });
     }
 
+    //Sets a group of users (json format) into the local storage
     var setUsers = function(usersJson){
         localStorage.setItem("users", JSON.stringify(usersJson));
     }
 
+    function logError(error){
+        console.log("ERROR: "+error);
+    }
 });
 

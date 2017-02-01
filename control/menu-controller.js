@@ -14,8 +14,8 @@ qqApp.controller("menuController", function ($scope, $rootScope, $http, storageS
 
     function loadQuiz(){
         storageService.getQuizList().then(
-            function(xxxx) {
-                listQuiz(xxxx);
+            function(quizList) {
+                listQuiz(quizList);
             }, 
             function(reason) {
                 alert('Failed: ' + reason);
