@@ -1,0 +1,27 @@
+{
+    "users": [{
+        "id":0,
+        "firstName":"Admin",
+        "lastName":"Johnson",
+        "email":"admin@gmail.com",
+        "phone":"(647) 948-4920",
+        "address":"974 Yorkland Blvd. - MIP PKK",
+        "password":"admin",
+        "quizTries" :[
+            {"quizId" :0,"numberOfTries":6,"maxScore":"4/10"},
+            {"quizId" :1,"numberOfTries":0,"maxScore":""}
+        ]
+    },{
+        "id":1,
+        "firstName":"Gustavo",
+        "lastName":"Leite",
+        "email":"gustavocalland@gmail.com",
+        "phone":"(647) 111-1111",
+        "address":"Toronto - P1P HWI",
+        "password":"123456",
+        "quizTries" :[
+            {"quizId" :0,"numberOfTries":6,"maxScore":"4/10"},
+            {"quizId" :1,"numberOfTries":2,"maxScore":"2/10"}
+        ]
+    }]
+}

@@ -1,0 +1,18 @@
+<div ng-controller="menuController">
+
+    <div ng-if="showLoginRequiredAlert" class="alert alert-danger alert-dismissable fade in">
+        <strong>Action denied!</strong> In order to answer the quiz, you must first be logged in.
+    </div>
+
+    <div class="panel panel-default panel-body" ng-repeat="quiz in quizList">
+        <h3>
+            <a ng-click="generateQuiz(quiz, $event)" ng-href="quiz">{{quiz.title}}</a> <br/>
+            <small>{{quiz.description}}</small>
+        </h3>
+        <div ng-show="quiz.showResults">
+            <span class="label">Number of tries <span class="badge">{{quiz.numberOfTries}}</span></span>
+            <span class="label badge-label-success">Score <span class="badge">{{quiz.maxScore}}</span></span>
+        </div>
+    </div>
+
+</div>

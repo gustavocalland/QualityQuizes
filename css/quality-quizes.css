@@ -1,0 +1,97 @@
+.navbar-brand {
+	padding: 0px; 
+}
+.navbar-brand>img {
+  height: 100%;
+  padding: 2px; 
+  width: auto;
+}
+
+.panel-title{
+    font-size: 30px;
+}
+.quiz-option-button{
+    margin: 10px 0px 0px 10px;
+}
+
+.quiz-selected-answer{
+    background-color: #d9edf7;
+    font-weight: bold;
+}
+
+ #answers-div .panel-body:hover{
+    background-color: #DDD;
+    cursor:pointer;
+ }
+
+span.label{
+    font-size: 15px;
+    background-color: #F1F1F1;
+    color: #666;
+}
+
+span.badge-label-success{
+    background-color: #7fbacc;
+    color: white;
+}
+
+.badge-label-success .badge{
+    color: #7fbacc;
+    background-color: white;
+}
+
+span.badge-label-failure{
+    background-color: #d9534f;
+    color: white;
+}
+
+.badge-label-failure .badge{
+    color: #d9534f;
+    background-color: white;
+}
+
+
+.fade-element-in.ng-enter {
+    transition: 0.8s linear all;
+    opacity: 0;
+}
+
+.fade-element-in-init .fade-element-in.ng-enter {
+    opacity: 1;
+}
+
+.fade-element-in.ng-enter.ng-enter-active {
+    opacity: 1;
+}
+
+.fade-element-in.ng-leave {
+    transition: 0.3s linear all;
+    opacity: 1;
+}
+.fade-element-in.ng-leave.ng-leave-active {
+    opacity: 0;
+}
+
+/*Small devices (xs)*/
+@media (max-width: 768px) {
+    .quiz-navbar-item{
+        float:right;
+        margin-top: -40px;
+    }
+
+    .quiz-navbar-item-label{
+        display: none;
+    }
+
+    .panel-title{
+        font-size: 18;
+    }
+
+    .panel-body h4{
+        font-size: 13px;
+    }
+
+    .quiz-option-button{
+        font-size: 12px;
+    }
+}

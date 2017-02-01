@@ -1,0 +1,71 @@
+<nav ng-controller="navBarController" class="navbar navbar-default navbar-static-top">
+    <div class="container">
+        <div class="navbar-header"> <!-- header div -->
+            <a class="navbar-brand" ng-href=".">
+            <img alt="Quality Quizes" src="images/Logo100x60.png">
+            </a>
+        </div> <!-- end of header containing logo image -->
+
+        <div class="navbar-right"> <!-- buttons div -->
+            <a ng-hide="userIsLoggedIn" class="btn btn-default navbar-btn" ng-href="signUp"> <!-- data-toggle="modal" data-target="#signUpModal" -->
+                <span class="glyphicon glyphicon-user" aria-hidden="true"></span>
+                Sign up
+            </a>
+
+            <button ng-hide="userIsLoggedIn" type="button" class="btn btn-default navbar-btn" data-toggle="modal" data-target="#loginModal"> 
+                <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                Login
+            </button>
+
+            <div ng-show="userIsLoggedIn" class="btn-group navbar-btn">
+                <button type="button" class="btn btn-default dropdown-toggle" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                    {{loggedInUser.firstName}} <span class="caret"></span>
+                </button>
+                <ul class="dropdown-menu">
+                    <li><a ng-href="myProfile">Edit user information</a></li>
+                    <li role="separator" class="divider"></li>
+                    <li>
+                        <a href="#" ng-click="logout()"><!-- This href reloads the page -->
+                            <span class="glyphicon glyphicon-log-in" aria-hidden="true"></span>
+                            <b>Logout</b>
+                        </a>
+                    </li>
+                </ul>
+            </div>
+        </div> <!-- end of div containing buttons -->
+    </div> <!-- end of container -->
+</nav>
+
+<!-- ===== LOGIN MODAL ===== -->
+<div id="loginModal" class="modal fade" tabindex="-1" role="dialog" aria-labelledby="loginModalLabel" ng-controller="loginModalController">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <form ng-submit="login()">   
+                <div class="modal-header"><!-- header -->
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="loginModalLabel">Login</h4>
+                </div><!-- end of modal-header -->
+
+                <div class="modal-body"><!-- body -->
+                    <div class="form-group text-center"><img src="images/Logo100x60.png"/></div>
+                    <div class="form-group">
+                        <input id="loginEmailInput" type="email" class="form-control" ng-model="emailInput"
+                               placeholder="Email" aria-describedby="loginEmailInputStatus" required>
+                    </div>
+                    <div class="form-group">
+                        <input id="loginPasswordInput" type="password" class="form-control" ng-model="passwordInput"
+                               placeholder="Password" aria-describedby="loginPasswordStatus" required>
+                    </div>
+                    <h5 style="color:#d9534f" ng-show="invalidCredentials">The username and password you entered did not match our records. Please double check and try again.</h5>
+                </div>  <!-- end of modal-body -->
+                
+                <div class="modal-footer"><!-- footer -->
+                    <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                    <button type="submit" class="btn btn-primary">Login</button>
+                </div>  <!-- end of modal-footer -->
+            </form>
+        </div> <!-- end of modal-content -->
+    </div>
+</div>
+<!-- ===== END OF LOGIN UP MODAL ===== -->
+

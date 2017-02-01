@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html>
+<head>
+  <meta charset="utf-8">    
+  <base href="/ProjetoFinal/">
+
+  <title>Quality Quizes</title>
+
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no, maximum-scale=1.0">
+  <meta name="author" content="Gustavo Leite and Ivan Valadares">
+
+  <link rel="shortcut icon" href="images/favicon.png">
+  <link rel="apple-touch-icon" href="images/favicon.png">
+
+  <link rel="styleSheet" href="css/bootstrap.min.css">
+  <link rel="styleSheet" href="css/quality-quizes.css">
+
+  <script src="js/jquery.min.js"></script>
+  <script src="js/angular.min.js"></script>
+  <script src="js/angular-animate.min.js"></script>
+  <script src="js/angular-route.min.js"></script>
+
+  <script src="js/bootstrap.min.js"></script>
+
+  <script src="control/quality-quizes-app.js"></script>
+  <script src="control/services.js"></script>
+  <script src="control/navbar-controller.js"></script>
+  <script src="control/menu-controller.js"></script>
+  <script src="control/quiz-controller.js"></script>
+  <script src="control/user-form-controller.js"></script>
+
+</head>
+
+<body ng-app="qqApp">
+    <div ng-include="'views/navigation-bar.html'"></div>
+
+    <section class="container">  
+        <div ng-view>loading...</div>
+    </section>    
+  </body>
+</html>
