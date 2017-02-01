@@ -45,47 +45,57 @@ qqApp.service('storageService', function($http, $q){
 
 
     this.getUserByEmail = function (email, callback) {
-       getAllUsers().then(function(response){
-            var users = response;
+       getAllUsers().then(
+           function(response){
+                var users = response;
 
-            for(i=0; i<users.length; i++){
-                if(users[i].email == email){
-                    callback(users[i]);
-                    return;
+                for(i=0; i<users.length; i++){
+                    if(users[i].email == email){
+                        callback(users[i]);
+                        return;
+                    }
                 }
-            }
 
-            callback(null);
-        },logError());
+                callback(null);
+            },
+            function (error){
+                logError(error)
+            }
+        );
     };
 
 
     this.setUser = function(user){
         return $q(function(success){
-            getAllUsers().then(function(allUsers){
-                var users = allUsers;
-                var exists = false;
-                var i=0;
+            getAllUsers().then(
+                function(allUsers){
+                    var users = allUsers;
+                    var exists = false;
+                    var i=0;
 
-                for(i=0; i<users.length; i++){
-                    if(users[i].id == user.id){
-                        exists = true;
-                        //replace previous user
-                        users[i] = user;
-                        
-                        break;
+                    for(i=0; i<users.length; i++){
+                        if(users[i].id == user.id){
+                            exists = true;
+                            //replace previous user
+                            users[i] = user;
+                            
+                            break;
+                        }
                     }
-                }
 
-                if (!exists){
-                    user.id = i+1;
-                    users.push(user);
-                }
+                    if (!exists){
+                        user.id = i+1;
+                        users.push(user);
+                    }
 
-                //persist users list
-                setUsers(users);
-                success();
-            },logError(error));
+                    //persist users list
+                    setUsers(users);
+                    success();
+                },
+                function(error){
+                    logError(error)
+                }
+            );
         });
     }
 

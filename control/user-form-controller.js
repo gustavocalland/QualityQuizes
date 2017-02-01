@@ -64,16 +64,20 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
                     newUser.id = currentUser.id;
                 }
 
-                storageService.setUser(newUser, function(){
-                            
-                    //save the results to the current user
-                    loginService.login(newUser);
+                storageService.setUser(newUser).then(
+                    function(){
+                        //save the results to the current user
+                        loginService.login(newUser);
 
-                    $location.path('/');
+                        $location.path('/');
 
-                    $scope.$emit('loginEvent', "user entrou");
+                        $scope.$emit('loginEvent', "user entrou");
 
-                });
+                    },
+                    function(err){
+                        alert(err);
+                    }
+                );
                 
             }
         })
