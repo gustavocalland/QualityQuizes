@@ -62,6 +62,7 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
 
                 if (currentUser != null){
                     newUser.id = currentUser.id;
+                    newUser.quizTries = currentUser.quizTries;
                 }
 
                 storageService.setUser(newUser).then(
