@@ -50,6 +50,7 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
             if($scope.passwordInput != $scope.confirmPasswordInput){
                 $scope.errorMessage = "The passwords do not match.";
                 $scope.emailContainerClass = "has-error"
+                return;
             }
 
             //No errors detected
