@@ -1,6 +1,7 @@
 //Controller used for the sign up and editing of user data
 qqApp.controller("userFormController", function($scope, $location, loginService, storageService) {
     var currentUser=null;
+    $scope.errorMessage = "";
 
     $scope.pageTitle = "Sign Up";
     $scope.pageMessage = "Join us today and answer thousands of quizes!";
@@ -36,11 +37,15 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
 
         storageService.getUserByEmail($scope.emailInput, function (user) {
 
+            if ($scope.myForm.$invalid){
+                $scope.errorMessage = "Please, fill all required fields!";
+                return;
+            }
+
             if(user && !(currentUser != null && currentUser.id == user.id)){
                 $scope.errorMessage = "This e-mail is already registered. Try loggin in.";
                 return;
             }
-            
 
             if($scope.passwordInput != $scope.confirmPasswordInput){
                 $scope.errorMessage = "The passwords do not match.";
