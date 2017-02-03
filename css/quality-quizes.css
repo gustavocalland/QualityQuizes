@@ -1,3 +1,4 @@
+
 .navbar-brand {
 	padding: 0px; 
 }
@@ -19,7 +20,7 @@
     font-weight: bold;
 }
 
- #answers-div .panel-body:hover{
+#answers-div .panel-body:hover{
     background-color: #DDD;
     cursor:pointer;
  }

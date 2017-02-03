@@ -69,6 +69,7 @@ qqApp.service('storageService', function($http, $q){
         return $q(function(success){
             getAllUsers().then(
                 function(allUsers){
+
                     var users = allUsers;
                     var exists = false;
                     var i=0;
@@ -91,6 +92,7 @@ qqApp.service('storageService', function($http, $q){
                     //persist users list
                     setUsers(users);
                     success();
+                    
                 },
                 function(error){
                     logError(error)
