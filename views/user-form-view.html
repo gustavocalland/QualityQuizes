@@ -1,6 +1,6 @@
 <div ng-controller="userFormController">
     <form class="panel panel-default panel-body" ng-submit="signUp()" name="myForm" novalidate>   
-        <h1>{{pageTitle}}</h>
+        <h1>{{pageTitle}}</h1>
 
         <div class="form-group"><h4>{{pageMessage}}</h4></div>
 
@@ -9,20 +9,26 @@
         </div>
 
         <div class="row">
-            <div class="form-group col-md-6" ng-class="{'has-success': myForm.firstNameInput.$valid, 'has-error': myForm.firstNameInput.$invalid}">
+            <div class="form-group col-md-6" ng-class="{'has-success': myForm.firstNameInput.$valid, 'has-error': myForm.firstNameInput.$invalid && myForm.firstNameInput.$touched}">
                 <input type="text" class="form-control" placeholder="First name" ng-model="firstNameInput" name="firstNameInput" required/></div>
-            <div class="form-group col-md-6" ng-class="{'has-success': myForm.lastNameInput.$valid, 'has-error': myForm.lastNameInput.$invalid}">
+            <div class="form-group col-md-6" ng-class="{'has-success': myForm.lastNameInput.$valid, 'has-error': myForm.lastNameInput.$invalid && myForm.lastNameInput.$touched}">
                 <input type="text" class="form-control" placeholder="Last name"  ng-model="lastNameInput" name="lastNameInput" required/></div>
         </div>
-        <div class="form-group" ng-class="{'has-success': myForm.emailInput.$valid, 'has-error': myForm.emailInput.$invalid}">
+
+        <div class="form-group" ng-class="{'has-success': myForm.emailInput.$valid, 'has-error': myForm.emailInput.$invalid && myForm.emailInput.$touched}">
             <input type="email" class="form-control" placeholder="Email" ng-model="emailInput" name="emailInput" required></div>
+
         <div class="form-group"><input type="tel" class="form-control" placeholder="Phone number" ng-model="phoneInput"></div>
+
         <div class="form-group"><input type="text" class="form-control" placeholder="Address" ng-model="addressInput"></div>
-        <div class="{{emailContainerClass}}">
-            <div class="form-group" ng-class="{'has-success': myForm.passwordInput.$valid, 'has-error': myForm.passwordInput.$invalid}">
+
+        <div>
+            <div class="form-group" ng-class="{'has-success': myForm.passwordInput.$valid, 'has-error': myForm.passwordInput.$invalid && myForm.passwordInput.$touched}">
                 <input type="password" class="form-control" placeholder="Password" ng-model="passwordInput" name="passwordInput" required></div>
-            <div class="form-group" ng-class="{'has-success': myForm.confirmPasswordInput.$valid, 'has-error': myForm.confirmPasswordInput.$invalid}">
-                <input type="password" class="form-control" placeholder="Confirm Password" ng-model="confirmPasswordInput" name="confirmPasswordInput" required></div>
+            <div class="form-group" ng-class="getConfirmPasswordClass()">
+                <input type="password" class="form-control" placeholder="Confirm Password" ng-model="confirmPasswordInput" name="confirmPasswordInput" required>
+                <p class="help-block">{{confirmPasswordErrorMessage}}</p>
+            </div>
         </div>
         
         <button type="submit" class="btn btn-primary">{{buttonTitle}}</button>

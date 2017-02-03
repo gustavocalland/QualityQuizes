@@ -93,4 +93,20 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
     $scope.editInfo = function(){
         //get all the user info and update the json file
     }
+
+    $scope.getConfirmPasswordClass = function(){
+        if($scope.myForm.confirmPasswordInput.$dirty){
+            if($scope.myForm.confirmPasswordInput.$invalid){
+                $scope.confirmPasswordErrorMessage = "Invalid field.";
+                return "has-error";
+            }
+            if($scope.confirmPasswordInput != $scope.passwordInput){
+                $scope.confirmPasswordErrorMessage = "The passwords do not match.";
+                return "has-error";
+            }
+
+            $scope.confirmPasswordErrorMessage =""
+            return "has-success";
+        }
+    }
 });
