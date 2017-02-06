@@ -16,6 +16,8 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
     $scope.passwordInput        = ""
     $scope.confirmPasswordInput = ""
 
+    $scope.confirmPasswordValid = false;
+
     //If the user is logged in and is accessing this controller, it means that 
     // he is trying to edit his info
     if(loginService.isLoggedIn()){
@@ -94,19 +96,21 @@ qqApp.controller("userFormController", function($scope, $location, loginService,
         //get all the user info and update the json file
     }
 
-    $scope.getConfirmPasswordClass = function(){
-        if($scope.myForm.confirmPasswordInput.$dirty){
-            if($scope.myForm.confirmPasswordInput.$invalid){
-                $scope.confirmPasswordErrorMessage = "Invalid field.";
-                return "has-error";
-            }
-            if($scope.confirmPasswordInput != $scope.passwordInput){
-                $scope.confirmPasswordErrorMessage = "The passwords do not match.";
-                return "has-error";
-            }
-
-            $scope.confirmPasswordErrorMessage =""
-            return "has-success";
+    $scope.validateConfirmPassword = function(){
+        if($scope.myForm.confirmPasswordInput.$invalid){
+            $scope.confirmPasswordErrorMessage = "Invalid field.";
+            $scope.confirmPasswordValid = false;
+            return;
         }
+        if($scope.confirmPasswordInput != $scope.passwordInput){
+            $scope.confirmPasswordErrorMessage = "The passwords do not match.";
+            $scope.confirmPasswordValid = false;
+            return;
+        }
+
+        $scope.confirmPasswordErrorMessage =""
+        $scope.confirmPasswordValid = true;
+        return;
     }
+
 });

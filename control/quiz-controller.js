@@ -105,11 +105,9 @@ qqApp.controller("quizController", function($scope, $rootScope, $location, login
         }
 
         //persits the result to current user
-        storageService.setUser(user, function(){
-                    
+        storageService.setUser(user).then(function(){
             //save the results to the current user
             loginService.login(user);
-
         });
 
      }
